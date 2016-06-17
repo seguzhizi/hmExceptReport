@@ -1,0 +1,59 @@
+﻿.div_top {
+    margin: 0 0;
+    width: 100%;
+    height: 65px;
+    background-image: url('../images/logobg.png');
+    position: fixed;
+    top: 0;
+    right: 0;
+}
+
+.div_logo {
+    position: absolute;
+    width: 278px;
+    height: 65px;
+    top: 0;
+    background-image: url('../images/LONGIN8.jpg');
+    /* 使ie6过滤图片透明部分 */
+    _filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src="../images/LONGIN8.jpg");
+    _background: none;
+}
+
+.menu_mousedown {
+    color: white;
+    background-color: #4692fa;
+}
+
+.menu_mouseover {
+    background-color: #f4f5f9;
+}
+
+.title_click {
+    border-bottom: 3px solid #4692fa;
+}
+
+.title_hover {
+    border-bottom: 3px solid #a0a3ab;
+}
+
+.mouduleTitleChild_click {
+    background-color: #4692fa;
+    color: #fff;
+}
+
+.role_item_hover {
+    background-color: #f4f5f9;
+}
+
+.role_item_mousedown {
+    background-color: #e6e7ec;
+}
+.tip_button{
+    border: 0;
+    outline: none;
+    width: 75px;
+    height: 30px;
+    background-image: url("../images/tip_button.jpg");
+    background-position-x: 0;
+    background-position-y: 0;
+}

@@ -1,0 +1,120 @@
+﻿body, html {
+    margin: 0 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    font-family: 微软雅黑;
+}
+
+body {
+    padding-top: 61px;
+    /* 使ie6兼容hover属性 */
+    behavior: url("../css/csshover.htc");
+}
+
+div {
+    border: 0;
+    outline: none;
+}
+
+.div_top {
+    margin: 0 0;
+    width: 100%;
+    height: 65px;
+    background-image: url('../images/logobg.png');
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+.div_center {
+    width: 100%;
+    height: 440px;
+    background-image: url('../images/LONGIN81.png');
+    background-size: cover;
+}
+
+.div_content {
+    background-color: transparent;
+    width: 995px;
+    margin: 0 auto;
+}
+
+.div_text {
+    margin-top: 80px;
+    width: 597px;
+    height: 278px;
+    position: absolute;
+    background-image: url('../images/LONGIN8_05.png');
+    _filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src="../images/LONGIN8_05.png");
+    _background: none;
+}
+
+.div_login {
+    margin-top: 80px;
+    width: 396px;
+    height: 278px;
+    float: right;
+    background-image: url('../images/LONGIN8_06.gif');
+}
+
+.login_input {
+    color:#222;
+    width: 268px;
+    height: 40px;
+    margin-left: 35px;
+    font-size: 20px;
+    padding-left: 42px;
+    border: 0;
+    outline: hidden;
+    background-color: transparent;
+    line-height: 40px;
+}
+
+.login_hint {
+    color: #fa1515;
+    margin-left: 35px;
+    height: 32px;
+    line-height: 36px;
+    font-size:14px;
+    font-weight:bold;
+}
+
+.btn_login {
+    width: 316px;
+    height: 35px;
+    background-image: url('../images/login_button.jpg');
+    border: 0;
+    outline: none;
+    margin-left: 35px;
+    cursor:pointer;
+}
+
+    .btn_login:hover {
+        background-position-y: -35px;
+    }
+    /*.btn_login:active {
+        background-position-y: 0;
+    }*/
+
+.btn_mousedown {
+    background-color: #3073ce;
+}
+
+.div_bottom {
+    width: 100%;
+    height: 65px;
+    background-color: #b8b9b9;
+    text-align: center;
+    position: absolute;
+    top: 500px;
+}
+
+.div_copyright {
+    width: 993px;
+    height: 65px;
+    margin-left: 18%;
+    background-image: url('../images/LONGIN8_09.png');
+    _filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src="../images/LONGIN8_09.png");
+    _background: none;
+}

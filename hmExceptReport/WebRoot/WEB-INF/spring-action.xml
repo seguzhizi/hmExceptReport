@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+ -->
+<beans xmlns="http://www.springframework.org/schema/beans" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:context="http://www.springframework.org/schema/context" 
+	xmlns:aop="http://www.springframework.org/schema/aop"  
+    xmlns:tx="http://www.springframework.org/schema/tx" 
+    xsi:schemaLocation="  
+    http://www.springframework.org/schema/context  
+    http://www.springframework.org/schema/context/spring-context.xsd  
+    http://www.springframework.org/schema/beans  
+    http://www.springframework.org/schema/beans/spring-beans.xsd  
+    http://www.springframework.org/schema/tx  
+    http://www.springframework.org/schema/tx/spring-tx.xsd  
+    http://www.springframework.org/schema/aop  
+    http://www.springframework.org/schema/aop/spring-aop.xsd"> 
+
+	<bean id="LoginAction" class="com.hm.excp.action.LoginAction" scope="session">
+		<property name="loginService" ref="LoginService"></property>
+	</bean>
+	<bean id="LogoutAction" class="com.hm.excp.action.LogoutAction" scope="session">
+	</bean>
+	<bean id="PeopleAction" class="com.hm.excp.action.PeopleAction" scope="session">
+		<property name="peopleService" ref="PeopleService"></property>
+	</bean>
+	<bean id="PeopleManageAction" class="com.hm.excp.action.PeopleManageAction" scope="session">
+		<property name="peopleService" ref="PeopleService"></property>
+	</bean>
+	<bean id="ExceptAction" class="com.hm.excp.action.ExceptAction" scope="session">
+		<property name="exceptService" ref="ExceptService"></property>
+		<property name="mailService" ref="MailService"></property>
+	</bean>
+	<bean id="ExceptQueryAction" class="com.hm.excp.action.ExceptQueryAction" scope="session">
+		<property name="exceptService" ref="ExceptService"></property>
+	</bean>
+	<bean id="SysLogAction" class="com.hm.excp.action.SysLogAction" scope="session">
+		<property name="sysLogService" ref="SysLogService"></property>
+	</bean>
+	
+</beans>

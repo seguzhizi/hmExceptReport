@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+ -->
+<beans xmlns="http://www.springframework.org/schema/beans" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:context="http://www.springframework.org/schema/context" 
+	xmlns:aop="http://www.springframework.org/schema/aop"  
+    xmlns:tx="http://www.springframework.org/schema/tx" 
+    xsi:schemaLocation="  
+    http://www.springframework.org/schema/context  
+    http://www.springframework.org/schema/context/spring-context.xsd  
+    http://www.springframework.org/schema/beans  
+    http://www.springframework.org/schema/beans/spring-beans.xsd  
+    http://www.springframework.org/schema/tx  
+    http://www.springframework.org/schema/tx/spring-tx.xsd  
+    http://www.springframework.org/schema/aop  
+    http://www.springframework.org/schema/aop/spring-aop.xsd"> 
+
+	<bean id="LoginDao" class="com.hm.excp.dao.LoginDaoImpl" parent="BaseDao">
+	</bean>
+	<bean id="ExceptDao" class="com.hm.excp.dao.ExceptDaoImpl" parent="BaseDao">
+	</bean>
+	
+	<bean id="PeopleDao" class="com.hm.excp.dao.PeopleDaoImpl" parent="BaseDao">
+	</bean>
+
+	<bean id="BaseDao" class="com.hm.excp.dao.BaseDao">
+		<property name="hibernateTemplate" ref="hibernateTemplate"></property>
+	</bean>
+
+<!-- 
+	<context:property-placeholder location="/WEB-INF/jdbc_config.properties"/>
+ -->
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
+		<property name="url" value="jdbc:mysql://localhost/testz?useUnicode=true&amp;characterEncoding=UTF-8"></property>
+		<property name="username" value="root" />
+		<property name="password" value="root" />
+		<!-- 数据库连接池保持的最小连接数 -->
+		<property name="minIdle" value="5" />
+		<!-- 数据库连接池保持的最大连接数 -->
+		<property name="maxIdle" value="30" />
+		<!-- 当数据库连接因为某种原因断掉之后，再重新从连接池中拿另外一个连接时实际上这个连接可能 已经无效，所以为了确保所拿到的连接全都有效需要在获取连接，返回连接以及连接空闲时进行 
+			有效性验证 下面3个设置为ture时进行验证，默认为false -->
+		<!-- 取得连接时是否进行有效性验证 -->
+		<property name="testOnBorrow" value="true" />
+		<!-- 返回连接时是否进行有效性验证 -->
+		<property name="testOnReturn" value="true" />
+		<!-- 连接空闲时是否进行有效性验证 -->
+		<property name="testWhileIdle" value="true" />
+	</bean>
+
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+		<property name="dataSource">
+			<ref bean="dataSource" />
+		</property>
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
+				<prop key="hibernate.show_sql">true</prop>
+				<prop key="hibernate.hbm2ddl.auto">update</prop>
+			</props>
+		</property>
+		<property name="mappingResources">
+			<list>
+				<value>com/hm/excp/dao/pojo/People.hbm.xml</value>
+				<value>com/hm/excp/dao/pojo/SysLog.hbm.xml</value>
+				<value>com/hm/excp/dao/pojo/TerminalExcept.hbm.xml</value>
+				<!-- 
+				<value>com/hm/excp/dao/pojo/Role.hbm.xml</value>
+				 -->
+			</list>
+		</property>
+	</bean>
+
+	<bean id="hibernateTemplate" class="org.springframework.orm.hibernate3.HibernateTemplate">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	
+	<!-- 配置事务管理器bean,使用HibernateTransactionManager事务管理器 -->
+	<bean id="transactionManager"
+		class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+		<!-- 为事务管理器注入sessionFactory" -->
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	<!-- 配置事务拦截器Bean -->
+	<bean id="transactionInterceptor"
+		class="org.springframework.transaction.interceptor.TransactionInterceptor">
+		<!-- 为事务拦截器bean注入一个事物管理器 -->
+		<property name="transactionManager" ref="transactionManager"></property>
+		<property name="transactionAttributes">
+			<!-- 定义事务传播属性 -->
+			<props>
+				<prop key="save">PROPAGATION_REQUIRED</prop>
+				<prop key="update">PROPAGATION_REQUIRED</prop>
+				<prop key="delete">PROPAGATION_REQUIRED</prop>
+				<prop key="add">PROPAGATION_REQUIRED</prop>
+				<prop key="find">PROPAGATION_REQUIRED,readOnly</prop>
+				<prop key="get">PROPAGATION_REQUIRED,readOnly</prop>
+				<prop key="query">PROPAGATION_REQUIRED,readOnly</prop>
+			</props>
+		</property>
+	</bean>
+	<!-- 定义BeanNameAutoProxyCreator -->
+	<bean class="org.springframework.aop.framework.autoproxy.BeanNameAutoProxyCreator">
+		<!-- 指定满足哪些bean自动生成业务代理 -->
+		<property name="beanNames">
+			<!-- 需要自动创建事务代理的bean -->
+			<list>
+				<value>*Service</value>
+			</list>
+			<!-- 其它需要自动创建事务代理的bean -->
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<value>transactionInterceptor</value>
+			</list>
+		</property>
+	</bean>
+	
+</beans>

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+ -->
+<beans xmlns="http://www.springframework.org/schema/beans" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:context="http://www.springframework.org/schema/context" 
+	xmlns:aop="http://www.springframework.org/schema/aop"  
+    xmlns:tx="http://www.springframework.org/schema/tx" 
+    xsi:schemaLocation="  
+    http://www.springframework.org/schema/context  
+    http://www.springframework.org/schema/context/spring-context.xsd  
+    http://www.springframework.org/schema/beans  
+    http://www.springframework.org/schema/beans/spring-beans.xsd  
+    http://www.springframework.org/schema/tx  
+    http://www.springframework.org/schema/tx/spring-tx.xsd  
+    http://www.springframework.org/schema/aop  
+    http://www.springframework.org/schema/aop/spring-aop.xsd"> 
+
+	<bean id="initParams" class="com.hm.excp.util.InitParamsLoad"></bean>
+		
+	<bean id="LoginService" class="com.hm.excp.service.LoginServiceImpl">
+		<property name="loginDao" ref="LoginDao"></property>
+	</bean>
+	<bean id="PeopleService" class="com.hm.excp.service.PeopleServiceImpl">
+		<property name="peopleDao" ref="PeopleDao"></property>
+		<property name="loginDao" ref="LoginDao"></property>
+	</bean>
+	
+	<bean id="ExceptService" class="com.hm.excp.service.ExceptServiceImpl">
+		<property name="peopleDao" ref="PeopleDao"></property>
+		<property name="exceptDao" ref="ExceptDao"></property>
+	</bean>
+	<bean id="SysLogService" class="com.hm.excp.service.SysLogServiceImpl">
+		<property name="dao" ref="BaseDao"></property>
+	</bean>
+	
+	<bean id="MailService" class="com.hm.excp.service.MailService">
+		<property name="dao" ref="BaseDao"></property>
+	</bean>
+	
+	<!-- 
+	<bean id="HMLogger" class="com.hm.excp.util.HMLogger">
+		<property name="logService" ref="SysLogService"></property>
+	</bean>
+	 -->
+	
+	
+	
+	<bean id="logInterceptor" class="com.hm.excp.util.SysLogInterceptor"></bean>
+	
+		
+</beans>

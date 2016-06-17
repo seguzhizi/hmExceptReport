@@ -1,0 +1,61 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping default-lazy="false">
+	<class name="com.hm.excp.dao.pojo.People" table="sys_people"
+		dynamic-insert="true" dynamic-update="true">
+		
+		<id name="sid" type="string">
+			<column name="sid" length="32"/>
+			<!-- 
+ 			<generator class="native"></generator>
+ 			-->
+			<generator class="uuid"/>
+		</id>
+		
+		<property name="username" type="string">
+			<column name="username" length="32" />
+		</property>
+		<property name="password" type="string">
+			<column name="password" length="32" />
+		</property>
+		<property name="realName" type="string">
+			<column name="realName" length="16" />
+		</property>
+		<property name="status" type="string">
+			<column name="status" length="1" />
+		</property>
+		<property name="celphone" type="string">
+			<column name="celphone" length="11" />
+		</property>
+		<property name="email" type="string">
+			<column name="email" length="32" />
+		</property>
+		<property name="idNo" type="string">
+			<column name="idNo" length="19" />
+		</property>
+		<property name="phone" type="string">
+			<column name="phone" length="16" />
+		</property>
+		<property name="remark" type="string">
+			<column name="remark" length="255" />
+		</property>
+		<property name="enableTime" type="timestamp">
+			<column name="enableTime" length="19" />
+		</property>
+		<property name="disableTime" type="timestamp">
+			<column name="disableTime" length="19" />
+		</property>
+		<property name="changeTime" type="timestamp">
+			<column name="changeTime" length="19" />
+		</property>
+		
+		<property name="roleId" type="string">
+			<column name="roleId" length="32" />
+		</property>
+		<!-- 
+		<many-to-one name="roleId" column="roleId" class="com.hm.excp.dao.pojo.Role"/>
+		 -->
+		
+	</class>
+</hibernate-mapping>

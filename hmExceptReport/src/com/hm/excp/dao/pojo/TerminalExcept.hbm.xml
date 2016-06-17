@@ -1,0 +1,58 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping default-lazy="false">
+	<class name="com.hm.excp.dao.pojo.TerminalExcept" table="TerminalExcept"
+		dynamic-insert="true" dynamic-update="true">
+		
+		<id name="exceptId" type="string">
+			<column name="exceptId" length="32"/>
+			<generator class="uuid"></generator>
+		</id>
+		<property name="terminalId" type="string">
+			<column name="terminalId" length="32" />
+		</property>
+		<property name="type" type="string">
+			<column name="type" length="4" />
+		</property>
+		<property name="tradeType" type="string">
+			<column name="tradeType" length="4" />
+		</property>
+		<property name="handleDate" type="date">
+			<column name="handleDate" length="10" />
+		</property>
+		<property name="handleTime" type="java.sql.Time">
+			<column name="handleTime" length="18" />
+		</property>
+		<property name="runStatus" type="java.lang.Character">
+			<column name="runStatus" length="1" />
+		</property>
+		<property name="mkzt" type="string">
+			<column name="mkzt" length="80" />
+		</property>
+		<property name="createTime" type="timestamp">
+			<column name="createTime" length="19" />
+		</property>
+		<property name="processState" type="string">
+			<column name="processState" length="8" />
+		</property>
+		<property name="dealPerson" type="string">
+			<column name="dealPerson" length="255" />
+		</property>
+		<property name="level" type="string">
+			<column name="level" length="1" />
+		</property>
+		<property name="remark" type="string">
+			<column name="remark" length="255" />
+		</property>
+		<property name="dealTime" type="timestamp">
+			<column name="dealTime" length="19" />
+		</property>
+		<property name="mailPeople" type="string">
+			<column name="mailPeople" length="128" />
+		</property>
+		<property name="mailTime" type="timestamp">
+			<column name="mailTime" length="19" />
+		</property>
+	</class>
+</hibernate-mapping>

@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping default-lazy="false">
+	<class name="com.hm.excp.dao.pojo.SysLog" table="sys_log"
+		dynamic-insert="true" dynamic-update="true">
+		
+		<id name="sid" type="string">
+			<column name="sid" length="32"/>
+			<!-- 
+ 			<generator class="native"></generator>
+ 			-->
+			<generator class="uuid"/>
+		</id>
+		
+		<property name="username" type="string">
+			<column name="username" length="32" />
+		</property>
+		<property name="ip" type="string">
+			<column name="ip" length="15" />
+		</property>
+		<property name="logMsg" type="string">
+			<column name="logMsg" length="255" />
+		</property>
+		<property name="logType" type="string">
+			<column name="logType" length="1" />
+		</property>
+		<property name="logTime" type="timestamp">
+			<column name="logTime" length="19" />
+		</property>
+	</class>
+</hibernate-mapping>

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+ -->
+<beans xmlns="http://www.springframework.org/schema/beans" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:context="http://www.springframework.org/schema/context" 
+	xmlns:aop="http://www.springframework.org/schema/aop"  
+    xmlns:tx="http://www.springframework.org/schema/tx" 
+    xsi:schemaLocation="  
+    http://www.springframework.org/schema/context  
+    http://www.springframework.org/schema/context/spring-context.xsd  
+    http://www.springframework.org/schema/beans  
+    http://www.springframework.org/schema/beans/spring-beans.xsd  
+    http://www.springframework.org/schema/tx  
+    http://www.springframework.org/schema/tx/spring-tx.xsd  
+    http://www.springframework.org/schema/aop  
+    http://www.springframework.org/schema/aop/spring-aop.xsd"> 
+
+<!-- TallyServerTask实现类 -->
+	<bean id="AutoDealExceptService" class="com.hm.excp.service.AutoDealExceptService">
+		<property name="dao" ref="BaseDao"></property>
+		<property name="mailService" ref="MailService"></property>
+	</bean>
+	
+	<!-- TallyTime对象 -->
+	<bean id="ManageServerTask" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<!-- 调用的类 -->
+		<property name="targetObject" ref="AutoDealExceptService"></property>	
+		<!-- 调用的方法 -->
+		<property name="targetMethod" value="getExecuteTaskList"></property>	
+		<!-- 
+		<property name="targetMethod" value="autoDealExcept"></property>	
+		 -->
+	</bean>
+		
+	<!-- 启动TallyTime调度规则 -->
+	<bean id="ManageTime" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean" >
+		<property name="jobDetail" ref="ManageServerTask"></property>
+		<property name="cronExpression">
+			 <!-- 每分钟执行一次 -->
+			 <value>0 0/1 * * * ?</value>
+			 <!-- 
+			 <value>0/5 * * * * ?</value>
+			  -->
+		</property>
+	</bean>
+	
+	<!-- 总管理类 如果将lazy-init='false'那么容器启动就会执行调度程序 -->
+	<bean id="startQuartz" lazy-init="false" autowire="no" class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+		<property name="triggers">
+			<list>
+				<ref bean="ManageTime" />
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="schedulerFactoryBean" class="org.springframework.scheduling.quartz.SchedulerFactoryBean" />
+	
+	<!-- 
+	<bean id="scheduler" class="org.springframework.scheduling.quartz.SchedulerFactoryBean" />
+	 -->
+
+
+</beans>
